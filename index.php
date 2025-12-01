@@ -65,6 +65,17 @@
             color: white; 
             opacity: 0.9;
         }
+        
+        input[type="datetime-local"] {
+            color-scheme: dark;       
+            background-color: #2c2c2c; 
+            border: 1px solid #555;   
+        }
+
+        input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
