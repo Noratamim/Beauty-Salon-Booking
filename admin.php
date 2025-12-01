@@ -7,6 +7,9 @@
     <title>Admin Dashboard | Luxe Salon</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -52,6 +55,7 @@
             font-size: 0.9rem;
             transition: 0.3s;
             text-decoration: none;
+            cursor: pointer; /* عشان يبين انه قابل للضغط */
         }
         .btn-delete:hover {
             background-color: #cc0000;
@@ -100,9 +104,9 @@
                                     <td><span class='badge-confirmed'>● " . $row["status"] . "</span></td>
                                     
                                     <td>
-                                        <a href='delete.php?id=" . $row["appointment_id"] . "' 
+                                        <a href='javascript:void(0)' 
                                            class='btn-delete'
-                                           onclick=\"return confirm('Are you sure you want to delete this booking?');\">
+                                           onclick=\"confirmDelete(" . $row["appointment_id"] . ")\">
                                            Delete 🗑️
                                         </a>
                                     </td>
@@ -118,6 +122,25 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function confirmDelete(id) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#ff4d4d', // نفس لون زر الحذف حقك
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // تحويل المستخدم لصفحة الحذف
+                    window.location.href = 'delete.php?id=' + id;
+                }
+            })
+        }
+    </script>
 
 </body>
 </html>
